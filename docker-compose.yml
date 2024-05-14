@@ -1,0 +1,44 @@
+services:
+  ubuntu:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: tail -f /dev/null
+    volumes:
+      - ./:/app
+    ports:
+      - "3000:3000"
+    networks:
+      - docker-network
+  db:
+    image: postgres:15.3-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: user_password
+      POSTGRES_USER: postgres
+    volumes:
+      - ./.docker/db/var:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - docker-network
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+      - ./.docker/db/pgadmin/var:/var/lib/pgadmin
+    ports:
+      - 8000:80
+    depends_on:
+      - db
+    networks:
+      - docker-network
+
+networks:
+  docker-network:
+    driver: bridge
+
+# sudo chmod 777 .docker/db/pgadmin/var/ ; docker compose restart pgadmin
