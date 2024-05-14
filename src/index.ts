@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 3000
 const app = express()
 
 app.get('/api/products', ProductController.findAll)
+app.post('/api/products', ProductController.create)
 
 app.get('/', (request, response) => {
   response.send('Server up')
