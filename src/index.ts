@@ -15,6 +15,7 @@ app.use(bodyParser.json())
 app.post('/api/products', ProductController.create)
 app.get('/api/products', ProductController.findAll)
 app.get('/api/products/:id', ProductController.findOne)
+app.put('/api/products/:id', ProductController.update)
 
 app.get('/', (request, response) => {
   response.send('Server up')
