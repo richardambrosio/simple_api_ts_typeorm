@@ -1,5 +1,5 @@
 import AppDataSource from "@/database/connection";
-import CreateProductDTO from "@/dtos/create.product.dto";
+import { CreateProductDTO } from "@/dtos/create.product.dto";
 import { Product } from "@/entities/product.entity";
 import { Repository } from "typeorm";
 
