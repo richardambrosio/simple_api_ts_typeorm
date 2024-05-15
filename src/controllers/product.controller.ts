@@ -1,6 +1,6 @@
 import { Request, Response} from 'express'
-import AppDataSource from '../connection'
-import { Product } from '../entities/product.entity'
+import AppDataSource from '@/connection'
+import { Product } from '@/entities/product.entity'
 import { validate } from 'class-validator'
 
 class ProductController {

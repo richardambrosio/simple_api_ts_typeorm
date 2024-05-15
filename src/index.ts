@@ -5,7 +5,7 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-import './connection'
+import '@/connection'
 import ProductController from '@/controllers/product.controller'
 import cors from 'cors'
 
