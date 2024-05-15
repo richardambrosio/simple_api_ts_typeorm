@@ -6,11 +6,13 @@ dotenv.config()
 
 import './connection'
 import ProductController from './controllers/product.controller'
+import cors from 'cors'
 
 const PORT = process.env.PORT || 3000
 const app = express()
 
 app.use(bodyParser.json())
+app.use(cors())
 
 app.post('/api/products', ProductController.create)
 app.get('/api/products', ProductController.findAll)
