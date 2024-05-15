@@ -99,12 +99,11 @@ class ProductController {
 
   }
 
-  async delete(request: Request, response: Response): Promise<Response> {
-    const productRepository = AppDataSource.getRepository(Product)
+  delete = async (request: Request, response: Response): Promise<Response> => {
     const id: string = request.params.id
 
     try {
-      productRepository.delete(id)
+      this.productRepository.delete(id)
 
       return response.status(204).send({})
     } catch (error) {
