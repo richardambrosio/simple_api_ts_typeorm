@@ -1,6 +1,7 @@
 import { Request, Response} from 'express'
 import AppDataSource from '../connection'
 import { Product } from '../entities/product.entity'
+import { validate } from 'class-validator'
 
 class ProductController {
   async findAll(request: Request, response: Response): Promise<Response> {
@@ -22,6 +23,14 @@ class ProductController {
     product.name = name
     product.weight = weight
     product.description = description
+
+    const errors = await validate(product)
+
+    if (errors.length > 0) {
+      return response.status(422).send({
+        errors: errors
+      })
+    }
 
     const created = await productRepository.save(product)
 
@@ -65,6 +74,14 @@ class ProductController {
     product.name = name
     product.description = description
     product.weight = weight
+
+    const errors = await validate(product)
+
+    if (errors.length > 0) {
+      return response.status(422).send({
+        errors: errors
+      })
+    }
 
     try {
       const updated = await productRepository.save(product)
