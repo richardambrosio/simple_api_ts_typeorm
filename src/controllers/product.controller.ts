@@ -16,11 +16,12 @@ class ProductController {
 
   async create(request: Request, response: Response): Promise<Response> {
     const productRepository = AppDataSource.getRepository(Product)
+    const { name, description, weight } = request.body
 
     const product = new Product()
-    product.name = 'Product 1'
-    product.weight = 90
-    product.description = 'A simple product'
+    product.name = name
+    product.weight = weight
+    product.description = description
 
     const created = await productRepository.save(product)
 
