@@ -12,8 +12,9 @@ const app = express()
 
 app.use(bodyParser.json())
 
-app.get('/api/products', ProductController.findAll)
 app.post('/api/products', ProductController.create)
+app.get('/api/products', ProductController.findAll)
+app.get('/api/products/:id', ProductController.findOne)
 
 app.get('/', (request, response) => {
   response.send('Server up')
